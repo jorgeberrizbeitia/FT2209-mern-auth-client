@@ -34,7 +34,7 @@ function Login() {
       const response = await loginService(userCredentials)
       
       // 3. recibir el Token
-      console.log(response.data.authToken)
+      // console.log(response.data.authToken)
   
       // 4. hacer algo con el Token?
       
@@ -48,7 +48,7 @@ function Login() {
       authenticaUser() // invocar la funcion de context que valida el Token
 
       // ! redireccionar al usuario
-
+      navigate("/profile")
 
 
     } catch (error) {
