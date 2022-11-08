@@ -9,7 +9,6 @@ const loginService = (userCredentials) => {
 }
 
 const verifyService = () => {
-  // ! esta ruta tendrá que pasar el Token
   return service.get("/auth/verify")
 }
 

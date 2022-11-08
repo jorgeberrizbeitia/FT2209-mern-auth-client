@@ -15,9 +15,14 @@ function AuthWrapper(props) {
       
       const response = await verifyService()
       console.log(response)
+      // a partir de este punto, el Token está validado en FE
+      setIsLoggedIn(true)
+      setUser(response.data)
 
     } catch (error) {
       console.log(error)
+      setIsLoggedIn(false)
+      setUser(null)
     }
 
   }
