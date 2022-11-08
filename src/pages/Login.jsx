@@ -2,7 +2,12 @@ import { useState } from "react";
 import { loginService } from "../services/auth.services"
 import { useNavigate } from "react-router-dom"
 
+import { useContext } from "react"
+import { AuthContext } from "../context/auth.context";
+
 function Login() {
+
+  const { authenticaUser } = useContext(AuthContext)   
 
   // configuramos el uso de navigate
   const navigate = useNavigate()
@@ -33,6 +38,17 @@ function Login() {
   
       // 4. hacer algo con el Token?
       
+      // metodo de localStorage para guardar info => localStorage.setItem()
+      localStorage.setItem("authToken", response.data.authToken)
+      // arg1. el nombre de lo que vamos a guardar
+      // arg2. el valor de lo qe vamos a guardar
+
+      // en este punto nosotros tenemos que guardar informacion de que el usuario se ha logeado
+      // esta info estará en un estado global (context)
+      authenticaUser() // invocar la funcion de context que valida el Token
+
+      // ! redireccionar al usuario
+
 
 
     } catch (error) {
