@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { loginService } from "../services/auth.services"
+import { useNavigate } from "react-router-dom"
 
 function Login() {
 
+  // configuramos el uso de navigate
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -11,6 +17,33 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     // ... login logic here
+
+    // 1. recopilar las credenciales del usuario
+    const userCredentials = {
+      email: email,
+      password: password
+    }
+
+    try {
+      // 2. contactar con el backend para validarlo
+      const response = await loginService(userCredentials)
+      
+      // 3. recibir el Token
+      console.log(response.data.authToken)
+  
+      // 4. hacer algo con el Token?
+      
+
+
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        // si el error es de tipo 400 me quedo en el componente y muestro el mensaje de error
+        setErrorMessage(error.response.data.errorMessage)
+      } else {
+        // si el error es otro (500) entonces si redirecciono a /error
+        navigate("/error")
+      }
+    }
   };
 
   return (
@@ -36,6 +69,9 @@ function Login() {
         />
 
         <button type="submit">Login</button>
+
+        {errorMessage !== "" && <p>{errorMessage}</p>}
+
       </form>
       
     </div>

@@ -6,4 +6,6 @@ const service = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL
 })
 
+// en todas las llamadas de este servicio, vamos a buscar el Token e incluirlo.
+
 export default service
