@@ -5,3 +5,11 @@
 #navbar a {
   color: green
 }
+
+.nav-active button {
+  background-color: blueviolet;
+}
+
+.nav-inactive button {
+  background-color: lightpink;
+}
